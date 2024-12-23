@@ -1,0 +1,8 @@
+version: 0.2
+phases:
+  build:
+    commands:
+      - docker-compose build
+      - docker tag <your-image-name> <your-ecr-repository-uri>:latest
+      - aws ecr get-login-password --region <your-region> | docker login --username AWS --password-stdin <your-ecr-repository-uri>
+      - docker push <your-ecr-repository-uri>:latest
